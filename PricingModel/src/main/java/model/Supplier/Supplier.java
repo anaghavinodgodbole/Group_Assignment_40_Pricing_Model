@@ -17,6 +17,7 @@ import model.ProductManagement.ProductsReport;
  */
 public class Supplier {
     String name;
+    String main;
     ProductCatalog productcatalog;
    ProductsReport productsreport;
     public Supplier(String n){

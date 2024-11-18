@@ -10,17 +10,27 @@ import java.util.ArrayList;
 import model.MarketModel.Market;
 import model.OrderManagement.Order;
 import model.Personnel.Person;
+import model.Personnel.Profile;
 
 /**
  *
  * @author kal bugrara
  */
-public class CustomerProfile {
+public class CustomerProfile  {
     ArrayList<Order> orders;
-    ArrayList<Market> markets;
-    
+    ArrayList<Market> markets;  
     Person person;
+     String role;
+  
+  
+    public String getRole() {
+        return "Customer";
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+   
     public CustomerProfile(Person p) {
 
         person = p;

@@ -17,7 +17,16 @@ import model.Personnel.Person;
 public class CustomerDirectory {
 
     Business business;
-    ArrayList<CustomerProfile> customerlist;
+     ArrayList<CustomerProfile> customerlist;
+
+    public ArrayList<CustomerProfile> getCustomerlist() {
+        return customerlist;
+    }
+
+    public void setCustomerlist(ArrayList<CustomerProfile> customerlist) {
+        this.customerlist = customerlist;
+    }
+   
 
     public CustomerDirectory(Business d) {
 
@@ -53,4 +62,14 @@ public class CustomerDirectory {
         }
         return customersreport; 
     } 
+        
+     public ArrayList<CustomerProfile> searchCustomerByName(String customerName) {
+        ArrayList<CustomerProfile> customerByName = new ArrayList<>();
+        for (CustomerProfile customer: customerlist){
+            if (customer.toString().toLowerCase().contains(customerName)) {
+                customerByName.add(customer);
+            }
+        }
+        return customerByName;
+    }
 }

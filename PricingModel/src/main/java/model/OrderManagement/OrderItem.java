@@ -27,6 +27,10 @@ public class OrderItem {
     public int getOrderItemTotal() {
         return actualPrice * quantity;
     }
+    @Override
+    public String toString(){
+        return selectedproduct.getName();
+    }
 
 //The following calculates what the price gain would have been if products were sold at target price
     public int getOrderItemTargetTotal() {
@@ -77,6 +81,13 @@ public class OrderItem {
 
     public int getQuantity() {
         return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity=quantity;
+    }
+    
+    public int calculatePricePerformanceIfRecommendedPrice() {
+        return (actualPrice - selectedproduct.getRecommendedPrice()) * quantity;
     }
     
 }

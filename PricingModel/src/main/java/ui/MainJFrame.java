@@ -13,9 +13,11 @@ import model.Personnel.Profile;
 import model.ProductManagement.Product;
 import model.SalesManagement.SalesPersonProfile;
 import model.OrderManagement.MasterOrderList;
+//import model.SolutionOrders.SolutionOrder;
 import model.Supplier.Supplier;
 import model.UserAccountManagement.UserAccount;
 import model.UserAccountManagement.UserAccountDirectory;
+//import UserInterface.Main.WorkSpaceProfiles.BusinessManagerWorkAreaJPanel;
 import ui.MarketingTeam.MarketingManagerWorkAreaJPanel1;
 import ui.SalesPerson.SalesPersonWorkAreaJPanel;
 import javax.swing.JPanel;
@@ -40,14 +42,89 @@ public class MainJFrame extends javax.swing.JFrame {
      */
 
     public MainJFrame() {
+//        System.out.println("1st");
         initComponents();
+//        System.out.println("2nd");
         business = ConfigureABusiness.initialize();
         suppliers = new SupplierDirectory();
         business.populateSuppliers();
         setSize(1100, 800);
 
+        // TODO: Create static suppliers
+        
+        //Check for whether suppliers were populated
+//        for(Supplier supplier : business.getSupplierDirectory().getSuplierList()){
+//            for(Product product: supplier.getProductCatalog().getProductList()){
+//                //System.out.println("Supplier Name : " + supplier.getName()  +"--" + product.getName() +" "+ product.getCeilingPrice()  );
+//            }
+//        }
+        
+      //  business.populateMarketChannels();
+        
+        //Check for markets and channels
+//        for(Market market : business.getMarketCatalog().getMarkets()){
+//            System.out.println("Current Market is : " + market.getName());
+//            System.out.println("--------------------------------");
+//            
+//            for (Channel channel : market.getValidchannels()){
+//                System.out.println(channel.getChannelType());
+//            }
+//        }
+//        System.out.println("Printing market channel combo");
+//        System.out.println("-------------------------------");
+//        int j = 0;
+//        for (MarketChannelAssignment mca : business.getMarketChannelComboCatalog().getMcalist()){
+//            System.out.println(j+1);
+//            System.out.println("MCA : channel - "+mca.getChannel().getChannelType() + " and Market - " + mca.getMarket().getName());
+//        }
         
         business.populateCustomersSalesMarketing();
+
+// TODO:  CREATE 10 CUSTOMER HERE
+        
+//        for (CustomerProfile customer: business.getCustomerDirectory().getCustomerlist() ){
+//            System.out.println("*************************************");
+//            System.out.println("Current customer is:" + customer.getPerson().toString());
+//            System.out.println("Current customer's market and Channel : " +customer.getMarkets().get(0).getName() +" - " + customer.getMca().get(0).getChannel().getChannelType());
+//            System.out.println("--------------------------------"); 
+//        }
+
+//        business.createSolutionOffers();
+        
+        
+//        for(SolutionOffer so: business.getSolutionoffercatalog().getSolutionoffers()){
+//            System.out.println("----------------");
+//            System.out.println("The Market Channel Assignment is : Market ==> " + so.getMarketchannelcomb().getMarket().getName() + " and Channel ==> " + so.getMarketchannelcomb().getChannel().getChannelType());
+//            System.out.println("Product size for this bundle " + so.getProducts().size() +"    "+ so.getProducts().get(0).getName());
+//            System.out.println("Total Ceiling Price : " + so.getTotalCeilingPrice() + " and total Floor price : " + so.getTotalFloorPrice());
+//            System.out.println("-------------End of this product-------------");
+//        }
+
+//        business.orderSolutionOffers();
+        
+//        for(SolutionOrder mso : business.getMasterSolutionOrderList().getSolutionorderlist()){
+//            System.out.println("---------Solution Order ------------");
+//           System.out.println("Customer is: " + mso.getCustomer());
+//           System.out.println("salesperson is:" + mso.getSalesPerson().getPerson().getPersonId());
+//           System.out.println("Product 1 is: " + mso.getSelectedsolutionoffer().getProducts().get(0).getName());
+//           System.out.println("Product count: " + mso.getSelectedsolutionoffer().getProducts().size());
+//        }
+        
+//        for(SolutionOrder so : business.getMasterSolutionOrderList().getSolutionorderlist()){
+//            System.out.println("*****************************************");
+//            System.out.println("Product List");
+//            for(Product product:so.getSelectedsolutionoffer().getProducts()){
+//                System.out.println(product.getName() +" | F, T, C : " + product.getFloorPrice() + ", " + product.getTargetPrice() + ", " + product.getCeilingPrice());
+//                
+//            }
+//            System.out.println("Price sold at : " + so.getSolutionPrice());
+//            System.out.println("Target price of bundle : " + so.getTotalTargetPrice());
+//            System.out.println("Floor and Ceiling price : " + so.getSelectedsolutionoffer().getTotalFloorPrice() +"||| " +so.getSelectedsolutionoffer().getTotalCeilingPrice()  );
+//            System.out.println("-----------------------------------------");
+//        }
+//
+//        business.printSalesReport();
+        
     }
 
     public void insert(JPanel jpanel) {
@@ -141,6 +218,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_UserNameTextFieldActionPerformed
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // TODO add your handling code here:
+        //      WorkAreaJPanel ura = new WorkAreaJPanel(workareajpanl);
 
         String un = UserNameTextField.getText();
         String pw = PasswordTextField.getText();
@@ -153,9 +232,12 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         SalesPersonWorkAreaJPanel salesworkarea;
         MarketingManagerWorkAreaJPanel1 marketingworkarea;
+        // BusinessManagerWorkAreaJPanel bzmanagerworkarea;
         String r = useraccount.getRole();
         Profile profile = useraccount.getAssociatedPersonProfile();
-       
+        //       if (r.equalsIgnoreCase("sales")) {
+
+            //        if (profile instanceof SalesPersonProfile) {
                 if (profile instanceof SalesPersonProfile) {
                     SalesPersonProfile spp = (SalesPersonProfile) profile;
                     salesworkarea = new SalesPersonWorkAreaJPanel(business, spp, CardSequencePanel,"Sales");
@@ -173,6 +255,15 @@ public class MainJFrame extends javax.swing.JFrame {
                     ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
                 }
+
+                //        if (profile instanceof EmployeeProfile) {
+                    //
+                    //            bzmanagerworkarea = new BusinessManagerWorkAreaJPanel(business, CardSequencePanel);
+                    //            CardSequencePanel.removeAll();
+                    //            CardSequencePanel.add("Admin", bzmanagerworkarea);
+                    //            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                    //
+                    //        }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**

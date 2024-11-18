@@ -5,19 +5,28 @@
  */
 package model.Business;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import model.CustomerManagement.ChannelCatalog;
 import model.CustomerManagement.CustomerDirectory;
+import model.CustomerManagement.CustomerProfile;
 import model.CustomerManagement.MarketCatalog;
 import model.MarketingManagement.MarketingPersonDirectory;
+import model.MarketingManagement.MarketingPersonProfile;
 import model.OrderManagement.MasterOrderList;
 import model.Personnel.EmployeeDirectory;
+import model.Personnel.Person;
 import model.Personnel.PersonDirectory;
+import model.ProductManagement.Product;
+import model.ProductManagement.ProductCatalog;
 import model.ProductManagement.ProductSummary;
 import model.ProductManagement.ProductsReport;
 import model.ProductManagement.SolutionOfferCatalog;
 import model.SalesManagement.SalesPersonDirectory;
+import model.SalesManagement.SalesPersonProfile;
 import model.Supplier.Supplier;
 import model.Supplier.SupplierDirectory;
 import model.UserAccountManagement.UserAccountDirectory;
@@ -35,12 +44,20 @@ public class Business {
     SupplierDirectory suppliers;
     MarketCatalog marketcatalog;
     ChannelCatalog channelcatalog;
-    SolutionOfferCatalog solutionoffercatalog;
+     SolutionOfferCatalog solutionoffercatalog;
     CustomerDirectory customerdirectory;
     EmployeeDirectory employeedirectory;
     SalesPersonDirectory salespersondirectory;
     UserAccountDirectory useraccountdirectory;
     MarketingPersonDirectory marketingpersondirectory;
+    public SolutionOfferCatalog getSolutionoffercatalog() {
+        return solutionoffercatalog;
+    }
+
+    public void setSolutionoffercatalog(SolutionOfferCatalog solutionoffercatalog) {
+        this.solutionoffercatalog = solutionoffercatalog;
+    }
+   
 
     public Business(String n) {
         name = n;
@@ -73,6 +90,10 @@ public class Business {
     }
 
     public SupplierDirectory getSupplierDirectory() {
+        System.out.println("getSupplierDirectory" + suppliers.getSuplierList());
+        for(Supplier s: suppliers.getSuplierList()){
+            System.out.println(s.getName());
+        }
         return suppliers;
     }
 
@@ -112,5 +133,59 @@ public class Business {
         public EmployeeDirectory getEmployeeDirectory() {
         return employeedirectory;
     }
+    public void populateSuppliers() {
+  
+    for (int supplierIndex = 1; supplierIndex <= 10; supplierIndex++) {
+        
+        Supplier currentSupplier = suppliers.newSupplier("Supplier" + supplierIndex);
+        
+        for (int productIndex = 1; productIndex <= 10; productIndex++) { 
+            ProductCatalog pc = currentSupplier.getProductCatalog();
+
+           
+            Product p = pc.newProduct(
+                "Product" + productIndex + "_Supplier" + supplierIndex,
+                (int) (Math.random() * 1000), 
+                (int) (Math.random() * 500 + 1000), 
+                (int) (Math.random() * 800 + 500) 
+            );
+            
+            
+            p.setSupplier(currentSupplier);        }
+    }
+    }
+     public void populateCustomersSalesMarketing() {
+
+    for (int customerIndex = 1; customerIndex <= 10; customerIndex++) {
+
+        Person customerPerson = persondirectory.newPerson("Customer" + customerIndex);
+
+
+        CustomerProfile currentCustomer = customerdirectory.newCustomerProfile(customerPerson);
+    }
+
+
+    for (int salesIndex = 1; salesIndex <= 5; salesIndex++) {
+    
+        Person salesPerson = persondirectory.newPerson("SalesPerson" + salesIndex);
+
+
+        SalesPersonProfile salespersonProfile = salespersondirectory.newSalesPersonProfile(salesPerson);
+
+
+        useraccountdirectory.newUserAccount(salespersonProfile, "sales" + salesIndex, "spassword" + salesIndex);
+        
+    }
+
+
+    for (int marketingIndex = 1; marketingIndex <= 5; marketingIndex++) {
+
+        Person marketingPerson = persondirectory.newPerson("MarketingPerson" + marketingIndex);
+
+   
+        MarketingPersonProfile marketingPersonProfile = marketingpersondirectory.newMarketingPersonProfile(marketingPerson);
+        useraccountdirectory.newUserAccount(marketingPersonProfile, "market" + marketingIndex, "mpassword" + marketingIndex);
+    }
+}
 
 }

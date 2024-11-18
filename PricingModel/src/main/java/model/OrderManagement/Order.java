@@ -47,6 +47,9 @@ public class Order {
         orderitems.add(oi);
         return oi;
     }
+      public ArrayList<OrderItem> getOrderItemList() {
+        return orderitems;
+    }
     //order total is the sumer of the order item totals
     public int getOrderTotal() {
         int sum = 0;
@@ -84,10 +87,17 @@ public class Order {
         else {return false;}
         
     }
+     public void removeOrderItem(OrderItem oi) {
+        orderitems.remove(oi);
+    }
+     
 public void CancelOrder(){
     status = "Cancelled";
 }
 public void Submit(){
     status = "Submitted";
 }
+public void modifyQuantity(OrderItem oi, int newQuantity) {
+        oi.setQuantity(newQuantity);
+    }
 }

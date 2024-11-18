@@ -17,9 +17,14 @@ import javax.swing.JOptionPane;
 import model.ProductManagement.Product;
 import model.ProductManagement.ProductSummary;
 
-
+/**
+ * @author jahnavipatel
+ */
 public class ManagePricingJPanel extends javax.swing.JPanel {
 
+    /**
+     * Creates new form ManageSuppliersJPanel
+     */
     JPanel cardSequencePanel;
     Business business;
     UserAccount userAccount;

@@ -22,6 +22,11 @@ public class SupplierDirectory {
         return supplier;
 
     }
+    public void addSupplier(Supplier s)
+    {
+        suppliers.add(s);
+        
+    }
     public Supplier findSupplier(String id){
         
         for (Supplier supplier: suppliers){
@@ -31,6 +36,14 @@ public class SupplierDirectory {
         return null;
         }
     public ArrayList<Supplier> getSuplierList(){
+         System.out.println("inside");
+        if(suppliers.isEmpty()){
+            System.out.println("empty");
+        }
+            
+        for(Supplier s: suppliers){
+            System.out.println(s.getName());
+        }
         return suppliers;
     }
     

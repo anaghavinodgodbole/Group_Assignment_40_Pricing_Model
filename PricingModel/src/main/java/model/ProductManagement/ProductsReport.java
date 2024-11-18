@@ -49,5 +49,18 @@ public class ProductsReport {
 
         return productsalwaysabovetarget;
     }
+    
+    public ArrayList<ProductSummary> getProductSummaryList(){
+        return productsummarylist; 
+    }
+    
+     public int getPricePerformance() {
+        int sum = 0;
+        for (ProductSummary ps : productsummarylist) {
+            System.out.println("Product: " + ps.getProductName() + " Price Performance: " + ps.getProductPricePerformance());
+            sum = sum + ps.getProductPricePerformance();
+        }
+        return sum;
+    }
 
 }

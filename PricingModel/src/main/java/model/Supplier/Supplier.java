@@ -15,9 +15,10 @@ import model.ProductManagement.ProductsReport;
  *
  * @author kal bugrara
  */
+import model.ProductManagement.Product;
 public class Supplier {
     String name;
-    ProductCatalog productcatalog;
+   ProductCatalog productcatalog;
    ProductsReport productsreport;
     public Supplier(String n){
         name = n;
@@ -38,10 +39,19 @@ public class Supplier {
        
     }
     
+    public int getPricePerformance() {
+        prepareProductsReport();
+        return productsreport.getPricePerformance();
+    }
+    
     public String getName(){
         return name;
     }
         public ProductCatalog getProductCatalog(){
+        
+        for(Product p: productcatalog.getProductList()){
+            System.out.println(p.getName());
+        }
         return productcatalog;
     }
     //add supplier product ..

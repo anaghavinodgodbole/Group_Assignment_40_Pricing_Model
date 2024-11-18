@@ -22,8 +22,9 @@ public class SolutionOffer {
         products = new ArrayList();
     } 
     
-    public void addProduct(Product p){
+    public Product addProduct(Product p){
         products.add(p);
+        return p;
     }
     public void setPrice(int p){
         price = p;

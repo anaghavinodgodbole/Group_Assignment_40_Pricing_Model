@@ -6,8 +6,10 @@
 package model.ProductManagement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.OrderManagement.OrderItem;
+import model.Supplier.Supplier;
 
 /**
  *
@@ -18,7 +20,25 @@ public class Product {
     private int floorPrice;
     private int ceilingPrice;
     private int targetPrice;
+
+    
+    Supplier supplier;
+     @Override
+    public String toString() {
+        return name;
+    }
     ArrayList<OrderItem> orderitems;
+    public String getName() {
+        return name;
+    }
+  
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
         public Product( int fp, int cp, int tp) {
 
         floorPrice = fp;
@@ -88,15 +108,51 @@ public class Product {
     public void setName(String n){
         name = n;
     }
-    @Override
-    public String toString(){
-        return name;
-    }
+   
     public int getFloorPrice(){
         return floorPrice;
     }
     public int getCeilingPrice(){
         return ceilingPrice;
     }
+    
+    public int getQuantity() {
+        int sum = 0;
+        for (OrderItem oi : orderitems) {
+            sum = sum + oi.getQuantity();
+        }
+        return sum;
+    }
+    
+     public int getOrderPricePerformanceIfRecommendedPrice() {
+        int sum = 0;
+        for (OrderItem oi : orderitems) {
+            sum = sum + oi.calculatePricePerformanceIfRecommendedPrice();     //positive and negative values
+        }
+        return sum;
+    }
+
+    public int getRecommendedPrice() {
+    int recommendedPrice = targetPrice;
+
+
+    HashMap<Integer, Integer> priceSalesMap = new HashMap<>();
+    for (OrderItem orderItem : orderitems) {
+        recommendedPrice = orderItem.getActualPrice();
+        priceSalesMap.put(recommendedPrice, priceSalesMap.getOrDefault(recommendedPrice, 0) + orderItem.getQuantity());
+    }
+
+
+    int maxQuantity = 0;
+    for (Integer currentPrice : priceSalesMap.keySet()) {
+        if (priceSalesMap.get(currentPrice) > maxQuantity) {
+            maxQuantity = priceSalesMap.get(currentPrice);
+            recommendedPrice = currentPrice;
+        }
+    }
+    return recommendedPrice;
+    
+}
+    
 
 }

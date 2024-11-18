@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import model.OrderManagement.Order;
 import model.Personnel.Person;
 import model.Personnel.Profile;
+import model.UserAccountManagement.UserAccount;
 
 /**
  *
@@ -17,12 +18,18 @@ import model.Personnel.Profile;
  */
 public class SalesPersonProfile extends Profile {
     ArrayList<Order> salesorders;
+    String role;
+  
 
+
+   
 
     public SalesPersonProfile(Person p) {
 
         super(p); 
         salesorders = new ArrayList();
+        
+    
 
     }
     public void addSalesOrder(Order o){
@@ -32,5 +39,7 @@ public class SalesPersonProfile extends Profile {
     public String getRole(){
         return  "Sales";
     }
-
+    
 }
+
+

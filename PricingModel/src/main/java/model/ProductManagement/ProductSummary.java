@@ -44,4 +44,7 @@ public class ProductSummary {
     public boolean isProductAlwaysAboveTarget(){
         return false; // to be implemented
     }
+    public String getProductName() {
+        return subjectproduct.getName();
+    }
 }
